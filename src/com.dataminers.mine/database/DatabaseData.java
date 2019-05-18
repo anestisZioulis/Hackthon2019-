@@ -12,47 +12,54 @@ public class DatabaseData {
         try {
             statement = connection.createStatement();
             ResultSet result = statement.executeQuery("SELECT request, ip FROM logs");
-            connection.close();
             return result;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
     }
-    public ResultSet getIncomingServerTraffic (Connection connection) {
+    public int getIncomingServerTraffic (Connection connection) {
+        int result=0;
         try {
             statement = connection.createStatement();
-            ResultSet result = statement.executeQuery( "SELECT * FROM `logs` WHERE requests LIKE 'GET%'");
-            connection.close();
+            ResultSet resultSet = statement.executeQuery( "SELECT COUNT(requests) AS SUM FROM `logs` WHERE requests LIKE 'GET%'");
+            if (resultSet.next()) {
+                result = resultSet.getInt(1);
+            }
             return result;
         } catch (SQLException e) {
             e.printStackTrace();
-            return null;
-        }
-    }
-
-    public ResultSet getServerErrorRequests (Connection connection) {
-        try {
-            statement = connection.createStatement();
-            ResultSet result = statement.executeQuery( "SELECT COUNT (requests) AS SUM FROM ``logs" +
-                    "WHERE requests LIKE 'GET%'");
-            connection.close();
-            return result;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
+            return 0;
         }
     }
 
-    public ResultSet getUniqueIps (Connection connection) {
+    public int getServerErrorRequests (Connection connection) {
+        int result=0;
         try {
             statement = connection.createStatement();
-            ResultSet result = statement.executeQuery( "SELECT COUNT(ip) as sum FROM (SELECT ip FROM `logs` GROUP BY ip) as ip");
-            connection.close();
+            ResultSet resultSet = statement.executeQuery( "SELECT COUNT(error) as SUM From `logs` WHERE error>=500 AND error<600");
+            if (resultSet.next()) {
+                result = resultSet.getInt(1);
+            }
             return result;
         } catch (SQLException e) {
             e.printStackTrace();
-            return null;
+            return result;
+        }
+    }
+
+    public int getUniqueIps (Connection connection) {
+        int result=0;
+        try {
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery( "SELECT COUNT(ip) as sum FROM (SELECT ip FROM `logs` GROUP BY ip) as ip");
+            if (resultSet.next()) {
+                result = resultSet.getInt(1);
+            }
+            return result;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return result;
         }
     }
 

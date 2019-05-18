@@ -3,16 +3,16 @@ package database;
 import java.sql.*;
 
 public class DatabaseConnection {
-    public boolean connectDatabase()
+    public Connection connectDatabase()
     {
         try
         {
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/logfiles","root","");
-            return true;
+            return connection;
         } catch (Exception e) {
             System.out.println(e);
-            return false;
+            return null;
         }
 
     }

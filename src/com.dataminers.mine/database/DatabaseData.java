@@ -12,6 +12,7 @@ public class DatabaseData {
         try {
             statement = connection.createStatement();
             ResultSet result = statement.executeQuery("SELECT request, ip FROM logs");
+            connection.close();
             return result;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -22,6 +23,7 @@ public class DatabaseData {
         try {
             statement = connection.createStatement();
             ResultSet result = statement.executeQuery( "SELECT * FROM `logs` WHERE requests LIKE 'GET%'");
+            connection.close();
             return result;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -34,6 +36,7 @@ public class DatabaseData {
             statement = connection.createStatement();
             ResultSet result = statement.executeQuery( "SELECT COUNT (requests) AS SUM FROM ``logs" +
                     "WHERE requests LIKE 'GET%'");
+            connection.close();
             return result;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -45,6 +48,7 @@ public class DatabaseData {
         try {
             statement = connection.createStatement();
             ResultSet result = statement.executeQuery( "SELECT COUNT(ip) as sum FROM (SELECT ip FROM `logs` GROUP BY ip) as ip");
+            connection.close();
             return result;
         } catch (SQLException e) {
             e.printStackTrace();

@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class RegexMatches
+public class SQLInjectionRegex
 {
     public int numberOfSQLinjection(ResultSet resultSet)
     {
@@ -28,4 +28,6 @@ public class RegexMatches
             return 0;
         }
     }
+
+
 }

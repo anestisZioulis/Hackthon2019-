@@ -4,17 +4,20 @@ import java.util.ArrayList;
 
 public class Attacks
 {
-    public ArrayList getAllAttackRequests(ArrayList sqli, ArrayList lfi, ArrayList xss)
+    public ArrayList<String> totalAttacks(ArrayList sqli, ArrayList lfi, ArrayList xss)
     {
-        sqli.addAll(lfi);
-        sqli.addAll(xss);
-        return sqli;
+        ArrayList<String> total = new ArrayList<>();
+        total.addAll(sqli);
+        total.addAll(lfi);
+        total.addAll(xss);
+        return total;
     }
-
-    public int numberOfAttacks(ArrayList attacks)
+    public int numberOfAttacks(ArrayList sqli, ArrayList lfi, ArrayList xss)
     {
         int numberOfAttacks=0;
-        numberOfAttacks=attacks.size();
+        numberOfAttacks+=sqli.size();
+        numberOfAttacks+=lfi.size();
+        numberOfAttacks+=xss.size();
         return numberOfAttacks;
     }
     public float attacksPercentage(int numOfAttacks)

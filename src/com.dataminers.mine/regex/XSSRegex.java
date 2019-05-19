@@ -2,15 +2,16 @@ package regex;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class XSSRegex {
-    public int numberOfXSSAttacksSimple(ResultSet resultSet)
+    public ArrayList XSSAttacksSimple(ResultSet resultSet)
     {
-        int counter=0;
+        ArrayList result = new ArrayList();
         try{
-            String regex = "/((\\%3C)|<)((\\%2F)|\\/)*[a-z0-9\\%]+((\\%3E)|>)/ix";
+            String regex = "%3script%3ealert";
             Pattern pattern = Pattern.compile(regex);
 
             while(resultSet.next())
@@ -18,58 +19,22 @@ public class XSSRegex {
                 Matcher matcher = pattern.matcher(resultSet.getString(1));
                 if(matcher.find())
                 {
-                    counter++;
+                    result.add(resultSet.getString(1));
                 }
             }
-            return counter;
+            return result;
         }catch(SQLException e)
         {
             System.out.println(e);
-            return 0;
+            return null;
         }
     }
-    public int numberOfXSSAttacksImages(ResultSet resultSet)
-    {
-        int counter=0;
-        try{
-            String regex = "/((\\%3C)|<)((\\%69)|i|(\\%49))((\\%6D)|m|(\\%4D))((\\%67)|g|(\\%47))[^\\n]+((\\%3E)|>)/I";
-            Pattern pattern = Pattern.compile(regex);
 
-            while(resultSet.next())
-            {
-                Matcher matcher = pattern.matcher(resultSet.getString(1));
-                if(matcher.find())
-                {
-                    counter++;
-                }
-            }
-            return counter;
-        }catch(SQLException e)
-        {
-            System.out.println(e);
-            return 0;
-        }
-    }
-    public int numberOfXSSAttacksHTMLTag(ResultSet resultSet)
+    public int numberOfXSSSimple(ArrayList arrayList)
     {
-        int counter=0;
-        try{
-            String regex = "/((\\%3C)|<)[^\\n]+((\\%3E)|>)/I";
-            Pattern pattern = Pattern.compile(regex);
-
-            while(resultSet.next())
-            {
-                Matcher matcher = pattern.matcher(resultSet.getString(1));
-                if(matcher.find())
-                {
-                    counter++;
-                }
-            }
-            return counter;
-        }catch(SQLException e)
-        {
-            System.out.println(e);
-            return 0;
-        }
+        int size=0;
+        size=arrayList.size();
+        return size;
     }
+
 }

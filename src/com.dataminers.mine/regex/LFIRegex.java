@@ -1,17 +1,18 @@
 package regex;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class SQLInjectionRegex
+public class LFIRegex
 {
-    public ArrayList SQLinjection(ResultSet resultSet)
+    public ArrayList LFIAttack(ResultSet resultSet)
     {
         ArrayList<String> result = new ArrayList<>();
         try{
-            String regex = "/(%27)|(\\')|(\\-\\-)|(\\%23)|(#)/ix";
+            String regex = "cmd";
             Pattern pattern = Pattern.compile(regex);
 
             while(resultSet.next())
@@ -30,12 +31,10 @@ public class SQLInjectionRegex
         }
     }
 
-    public int numberOfSQLInjections(ArrayList arrayList)
+    public int numberOfLFIAttacks(ArrayList arrayList)
     {
         int size=0;
         size=arrayList.size();
         return size;
     }
-
-
 }

@@ -33,10 +33,10 @@ public class Main {
             ArrayList sqli = SQLr.SQLinjection(dbdata.getRequests(connection));
             ArrayList xss = XSSr.XSSAttacksSimple(dbdata.getRequests(connection));
             ArrayList lfi = LFIr.LFIAttack(dbdata.getRequests(connection));
-            arrayAttacks = attacks.getAllAttackRequests(sqli,lfi,xss);
+            arrayAttacks = attacks.totalAttacks(sqli,lfi,xss);
             System.out.println("\nData Mining\n=============\n");
-            System.out.println("Number of Attacks : " + attacks.numberOfAttacks(arrayAttacks));
-            System.out.println("Percentage of Attacks : "+attacks.attacksPercentage(attacks.numberOfAttacks(arrayAttacks))+"%");
+            System.out.println("Number of Attacks : " + attacks.numberOfAttacks(sqli,lfi,xss));
+            System.out.println("Percentage of Attacks : "+attacks.attacksPercentage(attacks.numberOfAttacks(sqli,lfi,xss))+"%");
             System.out.println("SQL Injection Attacks : "+SQLr.numberOfSQLInjections(sqli));
             System.out.println("XSS Attacks : "+XSSr.numberOfXSSSimple(xss));
             System.out.println("LFI Attacks : "+LFIr.numberOfLFIAttacks(lfi)+"\n\n");

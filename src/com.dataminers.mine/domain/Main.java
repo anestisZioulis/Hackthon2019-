@@ -45,6 +45,7 @@ public class Main {
                 System.out.println(key + " " + value);
             }
 
+
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();

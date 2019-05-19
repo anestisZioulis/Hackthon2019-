@@ -40,7 +40,7 @@ public class CountryStatistics
         int countRom=Collections.frequency(arrayList,"Romania");
         int countFr=Collections.frequency(arrayList,"France");
         int countGr=Collections.frequency(arrayList,"Greece");
-        
+
 
         HashMap<String,Integer> hsmap = new HashMap<String,Integer>();
         hsmap.put("Thailand",countThai);

@@ -17,4 +17,10 @@ public class Attacks
         numberOfAttacks=attacks.size();
         return numberOfAttacks;
     }
+    public float attacksPercentage(int numOfAttacks)
+    {
+        float percentage=0;
+        percentage = (float)818200/85354;
+        return percentage;
+    }
 }

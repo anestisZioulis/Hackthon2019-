@@ -27,13 +27,19 @@ public class Main {
         ArrayList<String> countries;
         HashMap<String,Integer> hsmap;
         try {
-            System.out.println("Incoming Server Traffic: "+dbdata.getIncomingServerTraffic(connection)+"\n Sum of 500 errors: "+
-                    dbdata.getServerErrorRequests(connection) + "\n Unique ips: " + dbdata.getUniqueIps(connection) );
+            System.out.println("General\n=============\n");
+            System.out.println("Incoming Server Traffic: "+dbdata.getIncomingServerTraffic(connection)+"\nSum of 5xx errors: "+
+                    dbdata.getServerErrorRequests(connection) + "\nUnique ips: " + dbdata.getUniqueIps(connection) );
             ArrayList sqli = SQLr.SQLinjection(dbdata.getRequests(connection));
             ArrayList xss = XSSr.XSSAttacksSimple(dbdata.getRequests(connection));
             ArrayList lfi = LFIr.LFIAttack(dbdata.getRequests(connection));
             arrayAttacks = attacks.getAllAttackRequests(sqli,lfi,xss);
+            System.out.println("\nData Mining\n=============\n");
             System.out.println("Number of Attacks : " + attacks.numberOfAttacks(arrayAttacks));
+            System.out.println("Percentage of Attacks : "+attacks.attacksPercentage(attacks.numberOfAttacks(arrayAttacks))+"%");
+            System.out.println("SQL Injection Attacks : "+SQLr.numberOfSQLInjections(sqli));
+            System.out.println("XSS Attacks : "+XSSr.numberOfXSSSimple(xss));
+            System.out.println("LFI Attacks : "+LFIr.numberOfLFIAttacks(lfi)+"\n\n");
             countries = cs.getCountries(arrayAttacks, dbdata.getRequests(connection));
             hsmap = cs.getCountryCounts(countries);
 

@@ -15,7 +15,7 @@ public class CountryStatistics
             for (int i = 0; i < arrayList.size(); i++) {
                 while (resultSet.next())
                 {
-                    if(resultSet.getString(2).contains(arrayList.get(i)))
+                    if(resultSet.getString(1).contains(arrayList.get(i)))
                     {
                        country.add(resultSet.getString(3));
                     }
@@ -40,6 +40,7 @@ public class CountryStatistics
         int countRom=Collections.frequency(arrayList,"Romania");
         int countFr=Collections.frequency(arrayList,"France");
         int countGr=Collections.frequency(arrayList,"Greece");
+        
 
         HashMap<String,Integer> hsmap = new HashMap<String,Integer>();
         hsmap.put("Thailand",countThai);
@@ -54,6 +55,5 @@ public class CountryStatistics
 
         return hsmap;
     }
-
 
 }

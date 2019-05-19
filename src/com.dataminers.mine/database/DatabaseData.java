@@ -11,7 +11,7 @@ public class DatabaseData {
     public ResultSet getRequests(Connection connection){
         try {
             statement = connection.createStatement();
-            ResultSet result = statement.executeQuery("SELECT requests, ip FROM logs");
+            ResultSet result = statement.executeQuery("SELECT requests, ip, country, latitude, longtitude, date FROM logs");
             return result;
         } catch (SQLException e) {
             e.printStackTrace();
